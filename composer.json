@@ -1,0 +1,23 @@
+{
+    "name": "stsp/laravel-repository",
+    "type": "library",
+    "description": "Base repository in Laravel project",
+    "license": "MIT",
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "^9.14",
+        "illuminate/console": "^9.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stsp\\LaravelRepository\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Stsp\\LaravelRepository\\RepositoryServiceProvider"
+            ]
+        }
+    }
+}

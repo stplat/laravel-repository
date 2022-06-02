@@ -1,0 +1,53 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Models\{{ entity }} as Model;
+use Illuminate\Support\Collection;
+
+
+/**
+ * {{ class }}
+ * @package {{ namespace }}
+ */
+class {{ class }} extends Repository
+{
+    /**
+     * @return mixed
+     */
+    protected function getModelClass()
+    {
+        return Model::class;
+    }
+
+    /**
+     * Update item data.
+     *
+     * @param object $data
+     * @return bool
+     */
+    public function update(object $data): bool
+    {
+        $update = function ($model) use ($data) {
+            return $model->save();
+        };
+
+        return $this->recordHandler($data->id, $update);
+    }
+
+    /**
+     * Save item data.
+     *
+     * @param object $data
+     * @return bool
+     */
+    public function save(object $data): bool
+    {
+        $save = function ($model) use ($data) {
+            return $model->save();
+        };
+
+        return $this->saveHandler($save);
+    }
+
+}
