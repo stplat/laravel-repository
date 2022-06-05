@@ -15,22 +15,13 @@ class RepositoryServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->singleton(
-            'command.laravel-menu.migrate',
+            'command.laravel-repository.make',
             function ($app) {
-                return new MigrateCommand($app['files']);
+                return new RepositoryMakeCommand($app['files']);
             }
         );
 
-        $this->commands('command.laravel-menu.migrate');
-
-        $this->app->singleton(
-            'command.laravel-menu.seed',
-            function ($app) {
-                return new SeederCommand($app['files']);
-            }
-        );
-
-        $this->commands('command.laravel-menu.seed');
+        $this->commands('command.laravel-repository.make');
     }
 
     /**

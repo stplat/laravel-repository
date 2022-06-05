@@ -2,6 +2,7 @@
 
 namespace {{ namespace }};
 
+use Stsp\LaravelRepository\Repository;
 use App\Models\{{ entity }} as Model;
 use Illuminate\Support\Collection;
 

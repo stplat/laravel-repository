@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Stsp\LaravelRepository\Console;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -40,6 +41,16 @@ class RepositoryMakeCommand extends GeneratorCommand
     {
         $stub = parent::replaceClass($stub, $name);
         $entity = str_replace('Repository', '', $this->argument('name'));
+
+        $migrate = $this->option('m');
+        $migrateAndSeed = $this->option('ms');
+        $migrate = $migrate || $migrateAndSeed ? ' -m' : '';
+
+        if ($migrateAndSeed) {
+            Artisan::call('make:seeder ' . $entity . 'Seeder');
+        }
+
+        Artisan::call('make:model ' . $entity . $migrate);
         return str_replace(
             ['{{ class }}', '{{ entity }}'],
             [$this->argument('name'), $entity],
@@ -54,7 +65,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return base_path('stubs/repository.stub');
+        return __DIR__ . '/../stubs/repository.stub';
     }
 
     /**
@@ -88,7 +99,8 @@ class RepositoryMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['command', null, InputOption::VALUE_OPTIONAL, 'The terminal command that should be assigned.', 'command:name'],
+            ['m', null, InputOption::VALUE_NONE, 'Creating a database migration', null],
+            ['ms', null, InputOption::VALUE_NONE, 'Creating a database migration and seed', null],
         ];
     }
 }
