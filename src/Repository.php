@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace Stsp\LaravelRepository;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
