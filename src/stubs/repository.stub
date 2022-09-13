@@ -51,4 +51,17 @@ class {{ class }} extends Repository
         return $this->saveHandler($save);
     }
 
+    /**
+     * Delete item
+     *
+     * @param int $id
+     */
+    public function delete(int $id): bool
+    {
+        $destroy = function ($model) {
+            return $model->delete();
+        };
+
+        return $this->recordHandler($id, $destroy);
+    }
 }
