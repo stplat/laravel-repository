@@ -162,7 +162,7 @@ abstract class Repository
      * @param  string $field
      * @return Builder
      */
-    protected function whereBetween(Builder $query, ?array $data = null, string $field): Builder
+    protected function whereBetween(Builder $query, ?array $data = null, string $field = ''): Builder
     {
         if (!isset($data) && !is_array($data)) return $query;
 
@@ -186,7 +186,7 @@ abstract class Repository
      * @param  string $field
      * @return Builder
      */
-    protected function whereBetweenDate(Builder $query, ?array $data = null, string $field): Builder
+    protected function whereBetweenDate(Builder $query, ?array $data = null, string $field = ''): Builder
     {
         if (!isset($data) && !is_array($data)) return $query;
         $tableName = $this->getTableName();
@@ -209,7 +209,7 @@ abstract class Repository
      * @param  string $field
      * @return Builder
      */
-    protected function whereText(Builder $query, ?string $data = null, string $field): Builder
+    protected function whereText(Builder $query, ?string $data = null, string $field = ''): Builder
     {
         if (!isset($data)) return $query;
         $tableName = $this->getTableName();
